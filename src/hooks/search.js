@@ -5,14 +5,14 @@ export default function userSearch(items, serachProp) {
     const enteredSearchTerm = ref('');
     const activeSearchTerm = ref('');
 
-    const availableUsers = computed(function () {
+    const availableItems = computed(function () {
         let filteredItems = [];
         if (activeSearchTerm.value) {
-            filteredItems = items.filter((item) =>
+            filteredItems = items.value.filter((item) =>
                 item[serachProp].includes(activeSearchTerm.value)
             );
-        } else if (items) {
-            filteredItems = items;
+        } else if (items.value) {
+            filteredItems = items.value;
         }
         return filteredItems;
     });
@@ -29,5 +29,5 @@ export default function userSearch(items, serachProp) {
         enteredSearchTerm.value = val;
     }
 
-    return { enteredSearchTerm, availableUsers, updateSearch }
+    return { enteredSearchTerm, availableItems, updateSearch }
 }
